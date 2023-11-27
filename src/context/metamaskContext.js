@@ -1,10 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { ethers, formatEther } from 'ethers'
-import erc20Abi from '@/abi/MyToken' 
-
 export const MetamaskContext = createContext()
-
-const erc20Address = '0x1c9E0fd867675621356C5213b40e55187C387d72'
 
 export const MetamaskProvider = ({ children }) => {
   const [connected, setConnected] = useState(false)
@@ -36,48 +32,48 @@ export const MetamaskProvider = ({ children }) => {
    
   }
 
-  const sendTransaction = async (to, value, data) => {
-    try {
-      if (signer) {
-        const tx = {
-          to,
-          value,
-          data,
-        }
-        const txHash = await signer.sendTransaction(tx)
-        return txHash
-      } else {
-        throw new Error('Signer is not available')
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  // const sendTransaction = async (to, value, data) => {
+  //   try {
+  //     if (signer) {
+  //       const tx = {
+  //         to,
+  //         value,
+  //         data,
+  //       }
+  //       const txHash = await signer.sendTransaction(tx)
+  //       return txHash
+  //     } else {
+  //       throw new Error('Signer is not available')
+  //     }
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
 
-  const getErc20Balance = async (address) => {
-    const erc20Contract = new ethers.Contract(erc20Address, erc20Abi, provider)
-    return formatEther(await erc20Contract.balanceOf(address))
-  }
+  // const getErc20Balance = async (address) => {
+  //   const erc20Contract = new ethers.Contract(erc20Address, erc20Abi, provider)
+  //   return formatEther(await erc20Contract.balanceOf(address))
+  // }
 
-  const sendErc20 = async (to, amount) => {
-    const erc20Contract = new ethers.Contract(erc20Address, erc20Abi, signer)
-    console.log(await erc20Contract.balanceOf(address))
-    console.log(amount)
-    const tx = await erc20Contract.transfer(to, amount)
-    return await tx.wait()
-  }
+  // const sendErc20 = async (to, amount) => {
+  //   const erc20Contract = new ethers.Contract(erc20Address, erc20Abi, signer)
+  //   console.log(await erc20Contract.balanceOf(address))
+  //   console.log(amount)
+  //   const tx = await erc20Contract.transfer(to, amount)
+  //   return await tx.wait()
+  // }
 
   return (
     <MetamaskContext.Provider
       value={{ 
-        connected, 
+        connected,
+        signer,
+        provider,
         connect, 
         disconnect, 
-        sendTransaction, 
+        // sendTransaction, 
         address, 
-        balance,
-        getErc20Balance,
-        sendErc20
+        balance
       }}
     >
       {children}

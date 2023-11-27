@@ -39,8 +39,6 @@ const MyContract = () => {
     }
   }
 
-  console.log({ erc20Balance })
-
   return (
     <div className='p-3 font-mono'>
       <div>
