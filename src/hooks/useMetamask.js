@@ -7,14 +7,15 @@ const erc20Address = '0x1c9E0fd867675621356C5213b40e55187C387d72'
 
 export const useMetamask = () => {
   const { 
-    connected, 
-    signer,
+    connected,
     provider,
-    connect, 
-    disconnect, 
-    // sendTransaction, 
+
+    signer,
     address, 
-    balance 
+    balance,
+
+    connect,
+    disconnect
   } = useContext(MetamaskContext)
 
   const sendTransaction = async (to, value, data) => {
@@ -47,13 +48,14 @@ export const useMetamask = () => {
   }
 
   return {
-    connected, 
-    connect, 
-    disconnect, 
-    // sendTransaction, 
+    connected,
+    
     address, 
-    balance ,
-    // sendTransaction,
+    balance,
+
+    connect, 
+    disconnect,
+    sendTransaction,
     getErc20Balance,
     sendErc20
   }

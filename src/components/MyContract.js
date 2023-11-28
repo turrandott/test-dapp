@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useMetamask } from '@/hooks/useMetamask'
 
 const MyContract = () => {
-
   const {
     connect,
-    disconnect,
-    sendTx,
     address,
     balance,
+    disconnect,
+    sendTx,
     getErc20Balance,
     sendErc20
   } = useMetamask()
+
   const [erc20Balance, setErc20Balance] = useState()
 
   const connectMetamask = async () => {
@@ -71,7 +71,6 @@ const MyContract = () => {
           }
         </div>
       }
-
     </div>
   )
 }
